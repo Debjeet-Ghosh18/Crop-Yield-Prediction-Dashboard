@@ -46,6 +46,12 @@ def setup_project():
     
     return True
 
+# -----------------------------
+# ✅ Expose app + server for Gunicorn
+# -----------------------------
+from dashboard.app import app
+server = app.server   # This is what Gunicorn will run
+
 def main():
     """Main function to run the dashboard"""
     print("🌾 Starting Crop Prediction Dashboard...")
@@ -55,17 +61,13 @@ def main():
         print("❌ Setup failed. Exiting.")
         sys.exit(1)
     
-    # Import and run dashboard after setup
-    from dashboard.app import app
     config = Config()
-    
     print(f"🚀 Dashboard starting at http://{config.HOST}:{config.PORT}")
     
-    # Use app.run() instead of app.run_server() for newer Dash versions
+    # Local run
     try:
         app.run(debug=config.DEBUG, host=config.HOST, port=config.PORT)
     except AttributeError:
-        # Fallback for older Dash versions
         app.run_server(debug=config.DEBUG, host=config.HOST, port=config.PORT)
 
 if __name__ == "__main__":
