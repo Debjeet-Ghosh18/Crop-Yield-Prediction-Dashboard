@@ -16,6 +16,7 @@ from config import Config
 
 # Initialize the Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 app.title = "Crop Prediction Dashboard"
 
 # Initialize predictor and load data
