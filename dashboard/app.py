@@ -12,6 +12,10 @@ import logging
 
 # Configure logging to reduce console noise
 logging.getLogger('werkzeug').setLevel(logging.ERROR)
+logging.getLogger('dash').setLevel(logging.ERROR)
+
+# Suppress React dev tools warnings
+os.environ['REACT_APP_DISABLE_MINIFY'] = 'false'
 
 # Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
